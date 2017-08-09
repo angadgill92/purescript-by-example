@@ -6,6 +6,7 @@ import Control.Plus (empty)
 import Data.List (List(..), filter, head)
 import Data.Maybe (Maybe)
 
+
 type Address =
   { street :: String
   , city   :: String
@@ -37,3 +38,10 @@ findEntry firstName lastName = head <<< filter filterEntry
   where
   filterEntry :: Entry -> Boolean
   filterEntry entry = entry.firstName == firstName && entry.lastName == lastName
+
+
+findByStreet :: String -> AddressBook -> Maybe Entry
+findByStreet street = head <<< filter byStreet
+  where
+  byStreet :: Entry -> Boolean
+  byStreet entry = entry.address.street == street
